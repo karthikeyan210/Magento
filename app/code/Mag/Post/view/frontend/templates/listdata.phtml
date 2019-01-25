@@ -1,0 +1,76 @@
+<?php
+    $collection = $this->getTestCollection();
+?>
+<h1> Add New Post </h1><hr>
+<form class="" action="<?php echo $block->getBaseUrl().'post/index/save'; ?>" id="vky-test-form" method="post">
+    <fieldset class="fieldset">
+        <div class="field id invisible">
+            <label class="label" for="id"><span>ID</span></label>
+            <div class="control">
+                <input name="id" id="id" title="ID" value="" class="input-text" type="text">
+            </div>
+        </div>
+        <div class="field title">
+            <label class="label" for="title"><span>Title</span></label>
+            <div class="control">
+                <input name="title" id="title" title="Name" value="" class="input-text" type="text">
+            </div>
+        </div>
+        <div class="field author">
+            <label class="label" for="author"><span>Author</span></label>
+            <div class="control">
+                <input name="author" id="author" title="Author" value="" class="input-text" type="text">
+            </div>
+        </div>
+        <div class="field content">
+            <label class="label" for="content"><span>Content</span></label>
+            <div class="control">
+                <textarea name="content" id="content" title="Content" class="input-text" cols="5" rows="3"></textarea>
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" title="Submit" class="action submit primary">
+                <span>Save</span>
+            </button>
+        </div>
+    </div>
+</form>
+<br/>
+<div id='selected_post'></div>
+<br/>
+<h1> Collection of Posts </h1><hr>
+<table class="data table" id="test-data-table">
+    <caption class="table-caption">Test Data</caption>
+    <thead>
+        <tr>
+            <th scope="col" class="col title">Title</th>
+            <th scope="col" class="col author">Author</th>
+            <th scope="col" class="col content">Content</th>
+            <th scope="col" class="col created_at">Created At</th>
+            <th scope="col" class="col actions">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($collection as $key => $data): ?>
+            <tr>
+                <td data-th="Title" class="col title"><?php echo $data->getTitle(); ?></td>
+                <td data-th="Author" class="col author"><?php echo $data->getAuthor(); ?></td>
+                <td data-th="Content" class="col content"><?php echo $data->getContent(); ?></td>
+                <td data-th="Date" class="col created_at"><?php echo $data->getCreatedAt(); ?></td>
+                <td data-th="Actions" class="col actions">
+                    <button data_url="<?php echo $block->getBaseUrl().'post/index/edit'; ?>" data_id="<?php echo $data->getId(); ?>" class="action edit">
+                        Edit
+                    </button>
+                    <button data_url="<?php echo $block->getBaseUrl().'post/index/view'; ?>" data_id="<?php echo $data->getId(); ?>" class="action view">
+                        View
+                    </button>
+                    <button type="button" onclick="location.href='<?php echo $block->getBaseUrl().'post/index/delete/id/'.$data->getId(); ?>'">
+                        <span>Delete</span>
+                    </button>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
